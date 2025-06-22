@@ -248,8 +248,6 @@ const questions = [
         "skor": { "A": "S", "B": "F", "C": "N", "D": "N" }
     }
 ]
-
-// Database deskripsi tipe MBTI
 const mbtiTypes = {
     "ISTJ": {
         "nama": "The Inspector",
@@ -333,13 +331,11 @@ const mbtiTypes = {
     }
 };
 
-// Variabel state aplikasi
 let currentQuestion = 0;
 let answers = [];
 let userName = "";
 let shuffledQuestions = [];
 
-// DOM Elements
 const introScreen = document.getElementById('intro-screen');
 const testScreen = document.getElementById('test-screen');
 const loadingScreen = document.getElementById('loading-screen');
@@ -359,12 +355,10 @@ const typeDescription = document.getElementById('type-description');
 const typeCareer = document.getElementById('type-career');
 const dimensionScores = document.getElementById('dimension-scores');
 
-// Event Listeners
 startButton.addEventListener('click', startTest);
 nextButton.addEventListener('click', nextQuestion);
 prevButton.addEventListener('click', prevQuestion);
 restartButton.addEventListener('click', restartTest);
-
 
 function startTest() {
     if (nameInput.value.trim() === "") {
@@ -374,10 +368,8 @@ function startTest() {
 
     userName = nameInput.value.trim();
 
-    // Acak urutan pertanyaan
     shuffledQuestions = shuffleArray([...questions]);
 
-    // Reset state aplikasi
     currentQuestion = 0;
     answers = [];
 
@@ -385,7 +377,6 @@ function startTest() {
     showQuestion(currentQuestion);
 }
 
-// Fungsi untuk beralih antar layar
 function switchScreen(fromScreen, toScreen) {
     fromScreen.classList.remove('active');
     setTimeout(() => {
@@ -393,7 +384,6 @@ function switchScreen(fromScreen, toScreen) {
     }, 300);
 }
 
-// Fungsi untuk menampilkan pertanyaan
 function showQuestion(index) {
     if (index >= questions.length) {
         showLoadingScreen();
@@ -443,22 +433,17 @@ function showQuestion(index) {
 }
 
 function selectOption(element, index) {
-    // Hapus seleksi sebelumnya
     document.querySelectorAll('.option-btn').forEach(btn => {
         btn.classList.remove('selected');
     });
 
-    // Tambahkan seleksi pada opsi yang dipilih
     element.classList.add('selected');
 
-    // Simpan jawaban
     answers[index] = element.getAttribute('data-option');
 
-    // PERUBAHAN PENTING: Aktifkan tombol berikutnya setelah memilih jawaban
     nextButton.disabled = false;
 }
 
-// Fungsi untuk pindah ke pertanyaan berikutnya
 function nextQuestion() {
     if (!answers[currentQuestion]) {
         alert("Silakan pilih jawaban terlebih dahulu!");
@@ -473,7 +458,6 @@ function nextQuestion() {
     }
 }
 
-// Fungsi untuk kembali ke pertanyaan sebelumnya
 function prevQuestion() {
     if (currentQuestion > 0) {
         currentQuestion--;
@@ -481,17 +465,13 @@ function prevQuestion() {
     }
 }
 
-// Fungsi untuk menampilkan layar loading
 function showLoadingScreen() {
     switchScreen(testScreen, loadingScreen);
-
-    // Simulasikan proses perhitungan
     setTimeout(() => {
         showResults();
     }, 2500);
 }
 
-// Fungsi untuk menghitung hasil
 function calculateResults() {
     let scores = {
         E: 0, I: 0,
@@ -500,7 +480,6 @@ function calculateResults() {
         J: 0, P: 0
     };
 
-    // Hitung skor berdasarkan jawaban
     for (let i = 0; i < answers.length; i++) {
         const answer = answers[i];
         if (answer) {
@@ -510,7 +489,6 @@ function calculateResults() {
         }
     }
 
-    // Tentukan tipe MBTI
     const type =
         (scores.E > scores.I ? 'E' : 'I') +
         (scores.S > scores.N ? 'S' : 'N') +
@@ -524,18 +502,15 @@ function calculateResults() {
     };
 }
 
-// Fungsi untuk menampilkan hasil
 function showResults() {
     const results = calculateResults();
 
-    // Tampilkan data pengguna
     resultName.textContent = userName;
     mbtiType.textContent = results.type;
     typeName.textContent = results.details.nama;
     typeDescription.textContent = results.details.deskripsi;
     typeCareer.textContent = results.details.karir;
 
-    // Tampilkan skor dimensi
     dimensionScores.innerHTML = '';
 
     const dimensions = [
@@ -565,11 +540,9 @@ function showResults() {
         dimensionScores.innerHTML += dimensionHTML;
     });
 
-    // Tampilkan layar hasil
     switchScreen(loadingScreen, resultScreen);
 }
 
-// Fungsi untuk mengulang tes
 function restartTest() {
     currentQuestion = 0;
     answers = [];
