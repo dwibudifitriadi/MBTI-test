@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Kepribadian MBTI - Gaya Retro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="app-header neo-box">
+            <h1 class="app-title">TES KEPRIBADIAN MBTI</h1>
+            <div class="mbti-badge">E/I · S/N · T/F · J/P</div>
+        </div>
+
+        <div id="intro-screen" class="neo-box screen active">
+            <div class="text-center">
+                <h2 style="margin-bottom: 20px;">Selamat Datang di Tes MBTI</h2>
+                <p style="margin-bottom: 25px; font-size: 1.1rem; line-height: 1.6;">
+                    Tes ini terdiri dari 20 pertanyaan yang akan menganalisis preferensi alami Anda dalam memandang dunia dan membuat keputusan. Hasilnya akan mengungkap tipe kepribadian MBTI Anda yang unik!
+                </p>
+                
+                <div class="form-group">
+                    <label class="form-label">Masukkan Nama Anda:</label>
+                    <input type="text" id="nama" class="neo-input" placeholder="Nama lengkap Anda">
+                </div>
+                
+                <button id="start-test" class="btn btn-primary">
+                    <i class="fas fa-play-circle"></i> Mulai Tes Sekarang
+                </button>
+                
+                <div style="margin-top: 30px; background-color: rgba(255, 235, 0, 0.2); padding: 15px; border-radius: 8px; border-left: 4px solid var(--accent);">
+                    <h4><i class="fas fa-lightbulb"></i> Tips Mengerjakan Tes</h4>
+                    <p>Jawablah dengan jujur sesuai dengan diri Anda, bukan seperti apa yang Anda inginkan. Tidak ada jawaban benar atau salah.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="test-screen" class="neo-box screen">
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Progress Tes</span>
+                    <span id="progress-text">0/20</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div id="question-display"></div>
+
+            <div class="nav-buttons">
+                <button id="prev-btn" class="btn btn-accent" disabled>
+                    <i class="fas fa-arrow-left"></i> Prev
+                </button>
+                <button id="next-btn" class="btn btn-primary">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="neo-box screen">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+            <h2 class="text-center" style="margin-top: 20px;">Menganalisis Kepribadian Anda...</h2>
+            <p class="text-center">Tunggu sebentar, kami sedang memproses hasil tes Anda</p>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="neo-box screen">
+            <div class="result-card">
+                <h2><i class="fas fa-star"></i> Hasil Tes Kepribadian MBTI</h2>
+                <p style="margin-bottom: 20px;">Untuk: <strong id="result-name"></strong></p>
+                
+                <div class="type-badge" id="mbti-type">ISTJ</div>
+                <h3 class="type-name" id="type-name">The Inspector</h3>
+                
+                <div class="result-section">
+                    <h4><i class="fas fa-file-alt"></i> Deskripsi Kepribadian</h4>
+                    <p id="type-description">Anda adalah orang yang praktis dan faktual, bertanggung jawab dan terorganisir. Anda menghargai tradisi dan setia pada tanggung jawab.</p>
+                </div>
+                
+                <div class="result-section">
+                    <h4><i class="fas fa-briefcase"></i> Rekomendasi Karir</h4>
+                    <p id="type-career">Akuntan, Manajer, Hakim, Administrator</p>
+                </div>
+                
+                <div class="result-section">
+                    <h4><i class="fas fa-chart-bar"></i> Detail Skor Dimensi</h4>
+                    <div id="dimension-scores"></div>
+                </div>
+                
+                <button id="restart-btn" class="btn btn-accent" style="margin-top: 20px;">
+                    <i class="fas fa-redo"></i> Ambil Tes Lagi
+                </button>
+            </div>
+        </div>
+
+        <div class="app-footer">
+           <a href="https://www.github.com/dwibudifitriadi/MBTI-test" class="app-subtitle">Github : https://www.github.com/dwibudifitriadi/MBTI-test</a>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
